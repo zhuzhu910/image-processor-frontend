@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 AI图像处理大师</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 AI图像处理大师</h1>
+            <p>上传图片，AI智能处理，瞬间变换</p>
+            <p class="tech-info">🚀 Powered by Kaggle GPU + OpenCV</p>
+        </header>
+
+        <!-- 上传区域 -->
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-content">
+                    <div class="upload-icon">📁</div>
+                    <p>点击选择图片或拖拽到这里</p>
+                    <p class="upload-hint">支持 JPG, PNG, GIF 格式，最大10MB</p>
+                </div>
+                <input type="file" id="imageInput" accept="image/*" hidden>
+            </div>
+        </div>
+
+        <!-- 处理选项 -->
+        <div class="controls-section" id="controlsSection" style="display: none;">
+            <h3>🔧 选择处理效果</h3>
+            <div class="operation-buttons">
+                <button class="operation-btn" data-operation="edge_detection">
+                    <span class="btn-icon">🔍</span>
+                    边缘检测
+                </button>
+                <button class="operation-btn" data-operation="blur">
+                    <span class="btn-icon">🌫️</span>
+                    模糊效果
+                </button>
+                <button class="operation-btn" data-operation="sharpen">
+                    <span class="btn-icon">✨</span>
+                    锐化增强
+                </button>
+                <button class="operation-btn" data-operation="grayscale">
+                    <span class="btn-icon">⚫</span>
+                    黑白转换
+                </button>
+                <button class="operation-btn" data-operation="artistic">
+                    <span class="btn-icon">🎨</span>
+                    艺术效果
+                </button>
+                <button class="operation-btn" data-operation="cartoon">
+                    <span class="btn-icon">🎭</span>
+                    卡通效果
+                </button>
+            </div>
+        </div>
+
+        <!-- 结果展示 -->
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <div class="image-comparison">
+                <div class="image-container">
+                    <h4>📷 原图</h4>
+                    <img id="originalImage" alt="原图">
+                </div>
+                <div class="image-container">
+                    <h4>🎯 处理结果</h4>
+                    <div class="result-container">
+                        <img id="processedImage" alt="处理结果" style="display: none;">
+                        <div class="loading" id="loadingIndicator" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>Kaggle GPU正在高速处理...</p>
+                        </div>
+                    </div>
+                    <button id="downloadBtn" class="download-btn" style="display: none;">
+                        📥 下载结果
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 重置按钮 -->
+        <div class="reset-section">
+            <button id="resetBtn" class="reset-btn" style="display: none;">
+                🔄 重新选择图片
+            </button>
+        </div>
+
+        <!-- 底部信息 -->
+        <footer>
+            <p>🚀 Powered by Kaggle GPU + OpenCV | 🌟 部署在 GitHub Pages</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
