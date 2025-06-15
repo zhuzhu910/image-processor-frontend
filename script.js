@@ -1,7 +1,7 @@
-class ImageProcessor {
+class ShadowRemover {
     constructor() {
-        // 🚀 Kaggle API地址 - 直接使用你的ngrok地址
-        this.apiUrl = 'https://89d6-34-73-167-95.ngrok-free.app';
+        // 🌟 Kaggle阴影去除API地址 - 替换为你的ngrok地址
+        this.apiUrl = 'https://YOUR_NGROK_URL_HERE';  // ⚠️ 替换为实际地址
         this.currentImageData = null;
         this.initializeElements();
         this.bindEvents();
@@ -12,6 +12,7 @@ class ImageProcessor {
         this.imageInput = document.getElementById('imageInput');
         this.controlsSection = document.getElementById('controlsSection');
         this.resultsSection = document.getElementById('resultsSection');
+        this.algorithmInfo = document.getElementById('algorithmInfo');
         this.originalImage = document.getElementById('originalImage');
         this.processedImage = document.getElementById('processedImage');
         this.loadingIndicator = document.getElementById('loadingIndicator');
@@ -41,7 +42,7 @@ class ImageProcessor {
                 btn.style.opacity = '1';
                 setTimeout(() => {
                     this.operationBtns.forEach(b => b.style.opacity = '1');
-                }, 2000);
+                }, 3000);
             });
         });
         
@@ -103,11 +104,9 @@ class ImageProcessor {
     showControls() {
         this.controlsSection.style.display = 'block';
         this.resultsSection.style.display = 'block';
+        this.algorithmInfo.style.display = 'block';
         this.resetBtn.style.display = 'inline-block';
-        const algorithmInfo = document.getElementById('algorithmInfo');
-        if (algorithmInfo) {
-        algorithmInfo.style.display = 'block';
-    }
+        
         // 滚动到控制区域
         this.controlsSection.scrollIntoView({ 
             behavior: 'smooth', 
@@ -124,7 +123,7 @@ class ImageProcessor {
         this.showLoading();
 
         try {
-            console.log('🔥 发送请求到Kaggle GPU:', `${this.apiUrl}/process`);
+            console.log('🌟 发送请求到Kaggle阴影去除服务:', `${this.apiUrl}/process`);
             
             const response = await fetch(`${this.apiUrl}/process`, {
                 method: 'POST',
@@ -144,15 +143,15 @@ class ImageProcessor {
             }
 
             const result = await response.json();
-            console.log('✅ GPU处理结果:', result);
+            console.log('✅ 阴影去除结果:', result);
             
             if (result.success) {
                 this.processedImage.src = result.processed_image;
                 this.hideLoading();
                 this.downloadBtn.style.display = 'inline-block';
-                this.showMessage(`🚀 GPU处理完成！耗时: ${result.processing_time}`, 'success');
+                this.showMessage(`🌟 阴影去除完成！耗时: ${result.processing_time}`, 'success');
             } else {
-                throw new Error(result.error || '处理失败');
+                throw new Error(result.error || '阴影去除失败');
             }
 
         } catch (error) {
@@ -160,9 +159,9 @@ class ImageProcessor {
             this.hideLoading();
             
             if (error.message.includes('Failed to fetch')) {
-                this.showMessage('🔌 无法连接到Kaggle服务器，请检查网络连接', 'error');
+                this.showMessage('🔌 无法连接到Kaggle阴影去除服务，请检查网络连接', 'error');
             } else {
-                this.showMessage(`❌ 处理失败: ${error.message}`, 'error');
+                this.showMessage(`❌ 阴影去除失败: ${error.message}`, 'error');
             }
         }
     }
@@ -182,7 +181,7 @@ class ImageProcessor {
         if (!this.processedImage.src) return;
         
         const link = document.createElement('a');
-        link.download = `processed_image_${Date.now()}.jpg`;
+        link.download = `shadow_removed_${Date.now()}.jpg`;
         link.href = this.processedImage.src;
         link.click();
     }
@@ -211,7 +210,6 @@ class ImageProcessor {
         setTimeout(() => {
             messageDiv.remove();
         }, 3000);
-        
     }
 
     reset() {
@@ -219,6 +217,7 @@ class ImageProcessor {
         this.imageInput.value = '';
         this.controlsSection.style.display = 'none';
         this.resultsSection.style.display = 'none';
+        this.algorithmInfo.style.display = 'none';
         this.resetBtn.style.display = 'none';
         this.downloadBtn.style.display = 'none';
         this.hideLoading();
@@ -244,8 +243,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// 初始化应用
+// 初始化阴影去除应用
 document.addEventListener('DOMContentLoaded', () => {
-    new ImageProcessor();
+    new ShadowRemover();
 });
-
