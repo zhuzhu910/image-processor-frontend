@@ -104,7 +104,10 @@ class ImageProcessor {
         this.controlsSection.style.display = 'block';
         this.resultsSection.style.display = 'block';
         this.resetBtn.style.display = 'inline-block';
-        
+        const algorithmInfo = document.getElementById('algorithmInfo');
+        if (algorithmInfo) {
+        algorithmInfo.style.display = 'block';
+    }
         // 滚动到控制区域
         this.controlsSection.scrollIntoView({ 
             behavior: 'smooth', 
@@ -208,6 +211,7 @@ class ImageProcessor {
         setTimeout(() => {
             messageDiv.remove();
         }, 3000);
+        
     }
 
     reset() {
@@ -244,20 +248,4 @@ document.head.appendChild(style);
 document.addEventListener('DOMContentLoaded', () => {
     new ImageProcessor();
 });
-showControls() {
-    this.controlsSection.style.display = 'block';
-    this.resultsSection.style.display = 'block';
-    this.resetBtn.style.display = 'inline-block';
-    
-    // 显示算法说明
-    const algorithmInfo = document.getElementById('algorithmInfo');
-    if (algorithmInfo) {
-        algorithmInfo.style.display = 'block';
-    }
-    
-    // 滚动到控制区域
-    this.controlsSection.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
-    });
-}
+
