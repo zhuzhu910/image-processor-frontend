@@ -1,7 +1,7 @@
 class ShadowRemover {
     constructor() {
         // 🌟 Kaggle阴影去除API地址 - 替换为你的ngrok地址
-        this.apiUrl = 'https://2yXv6uU0SsM2UrIs8814sd4fzWA_zQS2Dwj3DT1QfSd4kyzA';  // ⚠️ 替换为实际地址
+        this.apiUrl = 'https://7965-34-73-167-95.ngrok-free.app';  // ⚠️ 替换为实际地址
         this.currentImageData = null;
         this.initializeElements();
         this.bindEvents();
