@@ -1,4 +1,4 @@
-class ShadowRemover {
+class SonarShadowRemover {
     constructor() {
         // 🌟 Kaggle阴影去除API地址 - 替换为你的ngrok地址
         this.apiUrl = 'https://c0c5-35-224-205-219.ngrok-free.app';  // ⚠️ 替换为实际地址
