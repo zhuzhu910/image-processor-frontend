@@ -1,53 +1,120 @@
-<header>
-    <h1>🌊 海下声纳图像阴影去除</h1>
-    <p>专业声纳图像处理算法，消除声学阴影和噪声</p>
-    <p class="tech-info">🚀 Powered by Kaggle GPU + 声纳专用算法</p>
-</header>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌊 海下声纳图像阴影去除</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊 海下声纳图像阴影去除</h1>
+            <p>专业声纳图像处理算法，消除声学阴影和噪声</p>
+            <p class="tech-info">🚀 Powered by Kaggle GPU + 声纳专用算法</p>
+        </header>
 
-<!-- 上传区域 -->
-<div class="upload-area" id="uploadArea">
-    <div class="upload-content">
-        <div class="upload-icon">🔊</div>
-        <p>上传声纳图像</p>
-        <p class="upload-hint">支持侧扫声纳、多波束声纳等各类声学图像</p>
+        <!-- 上传区域 -->
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-content">
+                <div class="upload-icon">🔊</div>
+                <p>上传声纳图像</p>
+                <p class="upload-hint">支持侧扫声纳、多波束声纳等各类声学图像</p>
+            </div>
+            <input type="file" id="imageInput" accept="image/*" hidden>
+        </div>
+
+        <!-- 控制区域 -->
+        <div class="controls-section" id="controlsSection">
+            <h3>🎛️ 选择处理算法</h3>
+            <div class="operation-buttons">
+                <button class="operation-btn" data-operation="basic_shadow">
+                    <span class="btn-icon">🔍</span>
+                    声学阴影检测
+                </button>
+                <button class="operation-btn" data-operation="advanced_shadow">
+                    <span class="btn-icon">🌊</span>
+                    斑点噪声抑制
+                </button>
+                <button class="operation-btn" data-operation="intelligent_fix">
+                    <span class="btn-icon">📡</span>
+                    声纳对比度增强
+                </button>
+                <button class="operation-btn" data-operation="color_correction">
+                    <span class="btn-icon">🏔️</span>
+                    海底回波增强
+                </button>
+                <button class="operation-btn" data-operation="brightness_balance">
+                    <span class="btn-icon">⚡</span>
+                    声阻抗校正
+                </button>
+                <button class="operation-btn" data-operation="contrast_enhancement">
+                    <span class="btn-icon">🔄</span>
+                    侧扫阴影补偿
+                </button>
+            </div>
+            
+            <div class="control-buttons">
+                <button class="control-btn" id="resetBtn">🔄 重新开始</button>
+                <button class="control-btn" id="downloadBtn">💾 下载结果</button>
+            </div>
+        </div>
+
+        <!-- 结果展示区域 -->
+        <div class="results-section" id="resultsSection">
+            <h3>📊 处理结果对比</h3>
+            
+            <!-- 加载指示器 -->
+            <div class="loading-indicator" id="loadingIndicator">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">🌊 正在处理声纳图像，请稍候...</div>
+            </div>
+            
+            <!-- 图像对比 -->
+            <div class="image-comparison">
+                <div class="image-container">
+                    <h4>📊 原始声纳图像</h4>
+                    <img id="originalImage" alt="原始声纳图像" style="display: none;">
+                </div>
+                <div class="image-container">
+                    <h4>🌊 处理后声纳图像</h4>
+                    <img id="processedImage" alt="处理后声纳图像" style="display: none;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 算法信息区域 -->
+        <div class="algorithm-info" id="algorithmInfo">
+            <h3>🧠 声纳专用算法详解</h3>
+            <div class="algorithm-grid">
+                <div class="algorithm-item">
+                    <h4>🔍 声学阴影检测</h4>
+                    <p>使用形态学操作和背景估计技术，自动识别和补偿声学阴影区域，恢复被遮挡的海底信息。</p>
+                </div>
+                <div class="algorithm-item">
+                    <h4>🌊 斑点噪声抑制</h4>
+                    <p>采用Lee滤波器算法，专门针对声纳图像中的乘性斑点噪声进行抑制，保持边缘细节。</p>
+                </div>
+                <div class="algorithm-item">
+                    <h4>📡 声纳对比度增强</h4>
+                    <p>结合自适应直方图均衡化和非线性增强，突出海底目标特征，改善图像可视性。</p>
+                </div>
+                <div class="algorithm-item">
+                    <h4>🏔️ 海底回波增强</h4>
+                    <p>强化垂直结构特征，增强海底地形和目标物体的轮廓，提高识别准确性。</p>
+                </div>
+                <div class="algorithm-item">
+                    <h4>⚡ 声阻抗校正</h4>
+                    <p>补偿距离衰减和声阻抗差异造成的强度变化，模拟时间增益控制（TGC）效果。</p>
+                </div>
+                <div class="algorithm-item">
+                    <h4>🔄 侧扫阴影补偿</h4>
+                    <p>针对侧扫声纳特有的阴影现象，使用方向性检测和插值算法进行专门补偿。</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <input type="file" id="imageInput" accept="image/*" hidden>
-</div>
 
-<!-- 处理选项 -->
-<div class="operation-buttons">
-    <button class="operation-btn" data-operation="basic_shadow">
-        <span class="btn-icon">🔍</span>
-        声学阴影检测
-    </button>
-    <button class="operation-btn" data-operation="advanced_shadow">
-        <span class="btn-icon">🌊</span>
-        斑点噪声抑制
-    </button>
-    <button class="operation-btn" data-operation="intelligent_fix">
-        <span class="btn-icon">📡</span>
-        声纳对比度增强
-    </button>
-    <button class="operation-btn" data-operation="color_correction">
-        <span class="btn-icon">🏔️</span>
-        海底回波增强
-    </button>
-    <button class="operation-btn" data-operation="brightness_balance">
-        <span class="btn-icon">⚡</span>
-        声阻抗校正
-    </button>
-    <button class="operation-btn" data-operation="contrast_enhancement">
-        <span class="btn-icon">🔄</span>
-        侧扫阴影补偿
-    </button>
-</div>
-
-<!-- 结果展示标题 -->
-<div class="image-container">
-    <h4>📊 原始声纳图像</h4>
-    <img id="originalImage" alt="原图">
-</div>
-<div class="image-container">
-    <h4>🌊 处理后声纳图像</h4>
-    <!-- ... -->
-</div>
+    <script src="script.js"></script>
+</body>
+</html>
