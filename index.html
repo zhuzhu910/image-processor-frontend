@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎨 AI图像处理大师</title>
+    <title>🌟 智能阴影去除大师</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎨 AI图像处理大师</h1>
-            <p>上传图片，AI智能处理，瞬间变换</p>
+            <h1>🌟 智能阴影去除大师</h1>
+            <p>专业阴影去除算法，让照片重获完美光线</p>
             <p class="tech-info">🚀 Powered by Kaggle GPU + OpenCV</p>
         </header>
 
@@ -18,8 +18,8 @@
         <div class="upload-section">
             <div class="upload-area" id="uploadArea">
                 <div class="upload-content">
-                    <div class="upload-icon">📁</div>
-                    <p>点击选择图片或拖拽到这里</p>
+                    <div class="upload-icon">📸</div>
+                    <p>上传有阴影的照片</p>
                     <p class="upload-hint">支持 JPG, PNG, GIF 格式，最大10MB</p>
                 </div>
                 <input type="file" id="imageInput" accept="image/*" hidden>
@@ -28,31 +28,31 @@
 
         <!-- 处理选项 -->
         <div class="controls-section" id="controlsSection" style="display: none;">
-            <h3>🔧 选择处理效果</h3>
+            <h3>🔧 选择阴影去除方式</h3>
             <div class="operation-buttons">
-                <button class="operation-btn" data-operation="edge_detection">
-                    <span class="btn-icon">🔍</span>
-                    边缘检测
+                <button class="operation-btn" data-operation="basic_shadow">
+                    <span class="btn-icon">🌈</span>
+                    基础阴影去除
                 </button>
-                <button class="operation-btn" data-operation="blur">
-                    <span class="btn-icon">🌫️</span>
-                    模糊效果
+                <button class="operation-btn" data-operation="advanced_shadow">
+                    <span class="btn-icon">🚀</span>
+                    高级阴影去除
                 </button>
-                <button class="operation-btn" data-operation="sharpen">
-                    <span class="btn-icon">✨</span>
-                    锐化增强
+                <button class="operation-btn" data-operation="intelligent_fix">
+                    <span class="btn-icon">🧠</span>
+                    智能阴影修复
                 </button>
-                <button class="operation-btn" data-operation="grayscale">
-                    <span class="btn-icon">⚫</span>
-                    黑白转换
-                </button>
-                <button class="operation-btn" data-operation="artistic">
+                <button class="operation-btn" data-operation="color_correction">
                     <span class="btn-icon">🎨</span>
-                    艺术效果
+                    颜色校正
                 </button>
-                <button class="operation-btn" data-operation="cartoon">
-                    <span class="btn-icon">🎭</span>
-                    卡通效果
+                <button class="operation-btn" data-operation="brightness_balance">
+                    <span class="btn-icon">💡</span>
+                    亮度平衡
+                </button>
+                <button class="operation-btn" data-operation="contrast_enhancement">
+                    <span class="btn-icon">⚡</span>
+                    对比度增强
                 </button>
             </div>
         </div>
@@ -61,21 +61,52 @@
         <div class="results-section" id="resultsSection" style="display: none;">
             <div class="image-comparison">
                 <div class="image-container">
-                    <h4>📷 原图</h4>
+                    <h4>📷 有阴影的原图</h4>
                     <img id="originalImage" alt="原图">
                 </div>
                 <div class="image-container">
-                    <h4>🎯 处理结果</h4>
+                    <h4>🌟 阴影去除后</h4>
                     <div class="result-container">
                         <img id="processedImage" alt="处理结果" style="display: none;">
                         <div class="loading" id="loadingIndicator" style="display: none;">
                             <div class="spinner"></div>
-                            <p>Kaggle GPU正在高速处理...</p>
+                            <p>Kaggle GPU正在智能去除阴影...</p>
                         </div>
                     </div>
                     <button id="downloadBtn" class="download-btn" style="display: none;">
-                        📥 下载结果
+                        📥 下载无阴影照片
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 算法说明 -->
+        <div class="algorithm-info" id="algorithmInfo" style="display: none;">
+            <h3>🧠 算法说明</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🌈 基础阴影去除</h4>
+                    <p>使用HSV色彩空间和直方图均衡化，适合轻微阴影</p>
+                </div>
+                <div class="info-card">
+                    <h4>🚀 高级阴影去除</h4>
+                    <p>LAB色彩空间处理 + 伽马校正，适合中等阴影</p>
+                </div>
+                <div class="info-card">
+                    <h4>🧠 智能阴影修复</h4>
+                    <p>自动检测阴影区域，局部增强处理，适合复杂阴影</p>
+                </div>
+                <div class="info-card">
+                    <h4>🎨 颜色校正</h4>
+                    <p>白平衡调整，修复阴影造成的色彩偏移</p>
+                </div>
+                <div class="info-card">
+                    <h4>💡 亮度平衡</h4>
+                    <p>YUV色彩空间处理，平衡整体亮度分布</p>
+                </div>
+                <div class="info-card">
+                    <h4>⚡ 对比度增强</h4>
+                    <p>动态范围扩展，提升图像层次感</p>
                 </div>
             </div>
         </div>
@@ -83,13 +114,13 @@
         <!-- 重置按钮 -->
         <div class="reset-section">
             <button id="resetBtn" class="reset-btn" style="display: none;">
-                🔄 重新选择图片
+                🔄 处理新照片
             </button>
         </div>
 
         <!-- 底部信息 -->
         <footer>
-            <p>🚀 Powered by Kaggle GPU + OpenCV | 🌟 部署在 GitHub Pages</p>
+            <p>🌟 专业阴影去除服务 | 🚀 Powered by Kaggle GPU | 🌟 完全免费使用</p>
         </footer>
     </div>
 
