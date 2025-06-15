@@ -3,117 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌊 海下声纳图像阴影去除</title>
+    <title>🌊 海下声纳图像阴影去除工具</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 背景动画 -->
+    <div class="ocean-background">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+    <!-- 主容器 -->
     <div class="container">
-        <header>
-            <h1>🌊 海下声纳图像阴影去除</h1>
-            <p>专业声纳图像处理算法，消除声学阴影和噪声</p>
-            <p class="tech-info">🚀 Powered by Kaggle GPU + 声纳专用算法</p>
+        <!-- 头部 -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="icon">🌊</span>
+                    海下声纳图像阴影去除工具
+                    <span class="subtitle">AI-Powered Sonar Shadow Removal</span>
+                </h1>
+                
+                <!-- API状态指示器 -->
+                <div class="api-status" id="apiStatus">
+                    <div class="status-indicator offline"></div>
+                    <span class="status-text">检查API连接中...</span>
+                </div>
+            </div>
         </header>
 
-        <!-- 上传区域 -->
-        <div class="upload-area" id="uploadArea">
-            <div class="upload-content">
-                <div class="upload-icon">🔊</div>
-                <p>上传声纳图像</p>
-                <p class="upload-hint">支持侧扫声纳、多波束声纳等各类声学图像</p>
+        <!-- API配置面板 -->
+        <div class="api-config-panel" id="apiConfigPanel">
+            <h3>⚙️ API配置</h3>
+            <div class="config-input-group">
+                <label for="apiUrl">API服务地址：</label>
+                <input type="url" id="apiUrl" placeholder="请输入您的API地址，例如: https://xxxxx.ngrok.io">
+                <button onclick="connectToAPI()" class="connect-btn">连接API</button>
             </div>
-            <input type="file" id="imageInput" accept="image/*" hidden>
-        </div>
-
-        <!-- 控制区域 -->
-        <div class="controls-section" id="controlsSection">
-            <h3>🎛️ 选择处理算法</h3>
-            <div class="operation-buttons">
-                <button class="operation-btn" data-operation="basic_shadow">
-                    <span class="btn-icon">🔍</span>
-                    声学阴影检测
-                </button>
-                <button class="operation-btn" data-operation="advanced_shadow">
-                    <span class="btn-icon">🌊</span>
-                    斑点噪声抑制
-                </button>
-                <button class="operation-btn" data-operation="intelligent_fix">
-                    <span class="btn-icon">📡</span>
-                    声纳对比度增强
-                </button>
-                <button class="operation-btn" data-operation="color_correction">
-                    <span class="btn-icon">🏔️</span>
-                    海底回波增强
-                </button>
-                <button class="operation-btn" data-operation="brightness_balance">
-                    <span class="btn-icon">⚡</span>
-                    声阻抗校正
-                </button>
-                <button class="operation-btn" data-operation="contrast_enhancement">
-                    <span class="btn-icon">🔄</span>
-                    侧扫阴影补偿
-                </button>
-            </div>
-            
-            <div class="control-buttons">
-                <button class="control-btn" id="resetBtn">🔄 重新开始</button>
-                <button class="control-btn" id="downloadBtn">💾 下载结果</button>
+            <div class="config-help">
+                <p>💡 <strong>如何获取API地址：</strong></p>
+                <ol>
+                    <li>运行Kaggle后端代码</li>
+                    <li>复制显示的ngrok公网地址</li>
+                    <li>粘贴到上方输入框并点击连接</li>
+                </ol>
             </div>
         </div>
 
-        <!-- 结果展示区域 -->
-        <div class="results-section" id="resultsSection">
-            <h3>📊 处理结果对比</h3>
-            
-            <!-- 加载指示器 -->
-            <div class="loading-indicator" id="loadingIndicator">
-                <div class="loading-spinner"></div>
-                <div class="loading-text">🌊 正在处理声纳图像，请稍候...</div>
-            </div>
-            
-            <!-- 图像对比 -->
-            <div class="image-comparison">
-                <div class="image-container">
-                    <h4>📊 原始声纳图像</h4>
-                    <img id="originalImage" alt="原始声纳图像" style="display: none;">
+        <!-- 主工具面板 -->
+        <div class="tool-panel" id="toolPanel" style="display: none;">
+            <div class="panel-grid">
+                <!-- 左侧：图像上传与处理选项 -->
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <div class="upload-icon">📷</div>
+                            <h3>选择声纳图像</h3>
+                            <p>支持 JPG, PNG, GIF 格式</p>
+                            <p class="file-size-hint">建议文件大小 < 10MB</p>
+                            <input type="file" id="fileInput" accept="image/*" hidden>
+                            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                                选择文件
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 处理选项 -->
+                    <div class="processing-options">
+                        <h3>🛠️ 处理算法选择</h3>
+                        <div class="option-grid">
+                            <label class="option-card">
+                                <input type="radio" name="operation" value="basic_shadow" checked>
+                                <div class="option-content">
+                                    <div class="option-icon">🔍</div>
+                                    <div class="option-title">声学阴影检测</div>
+                                    <div class="option-desc">基础阴影区域检测与补偿</div>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="radio" name="operation" value="advanced_shadow">
+                                <div class="option-content">
+                                    <div class="option-icon">🌊</div>
+                                    <div class="option-title">斑点噪声抑制</div>
+                                    <div class="option-desc">Lee滤波器去除声纳斑点噪声</div>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="radio" name="operation" value="intelligent_fix">
+                                <div class="option-content">
+                                    <div class="option-icon">📡</div>
+                                    <div class="option-title">智能对比度增强</div>
+                                    <div class="option-desc">自适应声纳对比度优化</div>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="radio" name="operation" value="color_correction">
+                                <div class="option-content">
+                                    <div class="option-icon">🏔️</div>
+                                    <div class="option-title">海底回波增强</div>
+                                    <div class="option-desc">增强海底目标轮廓特征</div>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="radio" name="operation" value="brightness_balance">
+                                <div class="option-content">
+                                    <div class="option-icon">⚡</div>
+                                    <div class="option-title">声阻抗校正</div>
+                                    <div class="option-desc">距离衰减与增益补偿</div>
+                                </div>
+                            </label>
+
+                            <label class="option-card">
+                                <input type="radio" name="operation" value="contrast_enhancement">
+                                <div class="option-content">
+                                    <div class="option-icon">🔄</div>
+                                    <div class="option-title">侧扫阴影补偿</div>
+                                    <div class="option-desc">专业侧扫声纳阴影修复</div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <button class="process-btn" id="processBtn" onclick="processImage()" disabled>
+                            <span class="btn-icon">🚀</span>
+                            开始处理
+                        </button>
+                    </div>
                 </div>
-                <div class="image-container">
-                    <h4>🌊 处理后声纳图像</h4>
-                    <img id="processedImage" alt="处理后声纳图像" style="display: none;">
+
+                <!-- 右侧：图像预览与结果 -->
+                <div class="preview-section">
+                    <div class="image-comparison">
+                        <!-- 原图预览 -->
+                        <div class="image-panel">
+                            <h3>📸 原始声纳图像</h3>
+                            <div class="image-container" id="originalImageContainer">
+                                <div class="image-placeholder">
+                                    <div class="placeholder-icon">🌊</div>
+                                    <p>请选择声纳图像</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 处理结果 -->
+                        <div class="image-panel">
+                            <h3>✨ 处理结果</h3>
+                            <div class="image-container" id="processedImageContainer">
+                                <div class="image-placeholder">
+                                    <div class="placeholder-icon">⭐</div>
+                                    <p>等待处理结果</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 处理状态和信息 -->
+                    <div class="processing-info" id="processingInfo" style="display: none;">
+                        <div class="info-header">
+                            <h3>🔄 处理状态</h3>
+                            <div class="processing-spinner"></div>
+                        </div>
+                        <div class="info-content">
+                            <p id="processingMessage">正在使用GPU加速处理声纳图像...</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 结果信息 -->
+                    <div class="result-info" id="resultInfo" style="display: none;">
+                        <h3>📊 处理结果信息</h3>
+                        <div class="result-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">处理算法</div>
+                                <div class="stat-value" id="operationType">-</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">处理时间</div>
+                                <div class="stat-value" id="processingTime">-</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">GPU加速</div>
+                                <div class="stat-value" id="gpuAccelerated">✅ 已启用</div>
+                            </div>
+                        </div>
+                        <button class="download-btn" onclick="downloadResult()">
+                            <span class="btn-icon">💾</span>
+                            下载处理结果
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 算法信息区域 -->
-        <div class="algorithm-info" id="algorithmInfo">
-            <h3>🧠 声纳专用算法详解</h3>
-            <div class="algorithm-grid">
-                <div class="algorithm-item">
-                    <h4>🔍 声学阴影检测</h4>
-                    <p>使用形态学操作和背景估计技术，自动识别和补偿声学阴影区域，恢复被遮挡的海底信息。</p>
+        <!-- 技术说明 -->
+        <div class="tech-info">
+            <h3>🔬 技术说明</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🌊 声学阴影检测</h4>
+                    <p>使用形态学操作检测声纳图像中的阴影区域，并进行自适应强度补偿</p>
                 </div>
-                <div class="algorithm-item">
-                    <h4>🌊 斑点噪声抑制</h4>
-                    <p>采用Lee滤波器算法，专门针对声纳图像中的乘性斑点噪声进行抑制，保持边缘细节。</p>
+                <div class="tech-card">
+                    <h4>📡 Lee滤波器</h4>
+                    <p>专门用于声纳图像的斑点噪声抑制，保持边缘信息同时去除噪声</p>
                 </div>
-                <div class="algorithm-item">
-                    <h4>📡 声纳对比度增强</h4>
-                    <p>结合自适应直方图均衡化和非线性增强，突出海底目标特征，改善图像可视性。</p>
-                </div>
-                <div class="algorithm-item">
-                    <h4>🏔️ 海底回波增强</h4>
-                    <p>强化垂直结构特征，增强海底地形和目标物体的轮廓，提高识别准确性。</p>
-                </div>
-                <div class="algorithm-item">
+                <div class="tech-card">
                     <h4>⚡ 声阻抗校正</h4>
-                    <p>补偿距离衰减和声阻抗差异造成的强度变化，模拟时间增益控制（TGC）效果。</p>
+                    <p>补偿距离衰减和声阻抗差异，模拟时间增益控制(TGC)</p>
                 </div>
-                <div class="algorithm-item">
-                    <h4>🔄 侧扫阴影补偿</h4>
-                    <p>针对侧扫声纳特有的阴影现象，使用方向性检测和插值算法进行专门补偿。</p>
+                <div class="tech-card">
+                    <h4>🔄 多波束处理</h4>
+                    <p>针对多波束声纳的角度校正和数据融合算法</p>
                 </div>
             </div>
         </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>🌊 海下声纳图像阴影去除工具 | Powered by AI & GPU加速</p>
+            <p>支持多种声纳类型：侧扫声纳、多波束声纳、前视声纳</p>
+        </footer>
     </div>
+
+    <!-- 消息提示 -->
+    <div class="toast" id="toast"></div>
 
     <script src="script.js"></script>
 </body>
