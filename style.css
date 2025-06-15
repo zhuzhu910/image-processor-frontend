@@ -312,3 +312,49 @@ footer {
 .controls-section, .results-section {
     animation: fadeInUp 0.6s ease-out;
 }
+/* 算法说明区域 */
+.algorithm-info {
+    padding: 50px;
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0fff4 100%);
+    border-top: 1px solid #d4edda;
+}
+
+.algorithm-info h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #28a745;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.info-card h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.info-card p {
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
