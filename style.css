@@ -264,54 +264,6 @@ footer {
     border-top: 1px solid #dee2e6;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    
-    header {
-        padding: 30px 20px;
-    }
-    
-    header h1 {
-        font-size: 2.2em;
-    }
-    
-    .upload-section, .controls-section, .results-section {
-        padding: 30px 20px;
-    }
-    
-    .image-comparison {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .operation-buttons {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .upload-area {
-        padding: 50px 20px;
-    }
-}
-
-/* 添加动画效果 */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.controls-section, .results-section {
-    animation: fadeInUp 0.6s ease-out;
-}
 /* 算法说明区域 */
 .algorithm-info {
     padding: 50px;
@@ -357,4 +309,58 @@ footer {
     color: #666;
     font-size: 0.9em;
     line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    header {
+        padding: 30px 20px;
+    }
+    
+    header h1 {
+        font-size: 2.2em;
+    }
+    
+    .upload-section, .controls-section, .results-section, .algorithm-info {
+        padding: 30px 20px;
+    }
+    
+    .image-comparison {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .operation-buttons {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .upload-area {
+        padding: 50px 20px;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* 添加动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.controls-section, .results-section, .algorithm-info {
+    animation: fadeInUp 0.6s ease-out;
 }
