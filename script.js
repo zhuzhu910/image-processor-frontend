@@ -3,7 +3,7 @@
 class SonarShadowRemover {
     constructor() {
         // ⚠️ 重要：这里需要替换为Kaggle返回的实际URL
-        this.apiUrl = 'https://c0c5-35-224-205-219.ngrok-free.app';  // 从Kaggle输出中复制
+        this.apiUrl = 'https://55c8-35-224-205-219.ngrok-free.app';  // 从Kaggle输出中复制
         this.currentImageData = null;
         this.isProcessing = false;
         this.retryCount = 0;
