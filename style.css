@@ -1,3 +1,5 @@
+/* 🌊 海下声纳图像阴影去除 - 样式表 */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,147 +10,203 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
-    padding: 20px;
+    color: #333;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-    overflow: hidden;
+    padding: 20px;
 }
 
+/* 🎯 页面头部样式 */
 header {
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    color: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
     text-align: center;
-    padding: 50px 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-    font-size: 2.8em;
+    font-size: 2.5em;
     margin-bottom: 15px;
-    font-weight: 700;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 header p {
     font-size: 1.2em;
-    opacity: 0.9;
-    margin-bottom: 10px;
+    color: #666;
+    margin: 10px 0;
 }
 
 .tech-info {
-    font-size: 0.9em !important;
-    opacity: 0.7 !important;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
 }
 
-.upload-section {
-    padding: 50px;
-}
-
+/* 🔄 上传区域样式 */
 .upload-area {
-    border: 3px dashed #667eea;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 3px dashed #ddd;
     border-radius: 20px;
-    padding: 80px 30px;
+    padding: 60px 40px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+    margin-bottom: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .upload-area:hover {
-    border-color: #764ba2;
-    background: linear-gradient(135deg, #f0f2ff 0%, #e8ebff 100%);
-    transform: translateY(-2px);
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+    transform: translateY(-5px);
 }
 
 .upload-area.dragover {
-    border-color: #28a745;
-    background: linear-gradient(135deg, #f0fff4 0%, #e8f5e8 100%);
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
     transform: scale(1.02);
 }
 
-.upload-icon {
-    font-size: 5em;
-    margin-bottom: 25px;
-    display: block;
+.upload-content {
+    pointer-events: none;
 }
 
-.upload-content p {
+.upload-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.upload-area p {
     font-size: 1.3em;
-    color: #555;
-    margin-bottom: 15px;
-    font-weight: 500;
+    color: #333;
+    margin: 10px 0;
 }
 
 .upload-hint {
+    color: #666 !important;
     font-size: 1em !important;
-    color: #888 !important;
-    font-weight: 400 !important;
 }
 
+/* 🎛️ 控制区域样式 */
 .controls-section {
-    padding: 50px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-top: 1px solid #dee2e6;
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .controls-section h3 {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     color: #333;
     font-size: 1.5em;
-    font-weight: 600;
 }
 
 .operation-buttons {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 .operation-btn {
-    padding: 20px;
-    border: none;
-    border-radius: 15px;
     background: linear-gradient(45deg, #667eea, #764ba2);
     color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 1.1em;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
     transition: all 0.3s ease;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 10px;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
 }
 
 .operation-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
 }
 
 .operation-btn:active {
-    transform: translateY(-2px);
+    transform: translateY(0);
 }
 
 .btn-icon {
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
+.control-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.control-btn {
+    background: #fff;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 10px;
+    padding: 12px 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.control-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* 📊 结果展示区域样式 */
 .results-section {
-    padding: 50px;
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.results-section h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1.5em;
 }
 
 .image-comparison {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
+    gap: 30px;
+    margin-bottom: 20px;
 }
 
 .image-container {
@@ -156,48 +214,38 @@ header p {
 }
 
 .image-container h4 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #333;
-    font-size: 1.3em;
-    font-weight: 600;
+    font-size: 1.2em;
 }
 
 .image-container img {
     max-width: 100%;
     height: auto;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
 .image-container img:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
-.result-container {
-    position: relative;
-    min-height: 200px;
-}
-
-.loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
+/* 🔄 加载指示器样式 */
+.loading-indicator {
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(248, 249, 255, 0.9);
-    border-radius: 15px;
+    padding: 40px;
+    color: #667eea;
 }
 
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #667eea;
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
@@ -208,152 +256,94 @@ header p {
     100% { transform: rotate(360deg); }
 }
 
-.loading p {
-    color: #667eea;
+.loading-text {
+    font-size: 1.2em;
     font-weight: 600;
-    font-size: 1.1em;
 }
 
-.download-btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    background: linear-gradient(45deg, #28a745, #20c997);
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.download-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
-}
-
-.reset-section {
-    padding: 30px 50px 50px;
-    text-align: center;
-}
-
-.reset-btn {
-    padding: 15px 35px;
-    border: 2px solid #667eea;
-    border-radius: 25px;
-    background: transparent;
-    color: #667eea;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.reset-btn:hover {
-    background: #667eea;
-    color: white;
-    transform: translateY(-2px);
-}
-
-footer {
-    background: #f8f9fa;
-    text-align: center;
-    padding: 30px;
-    color: #6c757d;
-    font-size: 0.9em;
-    border-top: 1px solid #dee2e6;
-}
-
-/* 算法说明区域 */
+/* 🧠 算法信息区域样式 */
 .algorithm-info {
-    padding: 50px;
-    background: linear-gradient(135deg, #e8f5e8 0%, #f0fff4 100%);
-    border-top: 1px solid #d4edda;
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .algorithm-info h3 {
-    text-align: center;
-    margin-bottom: 40px;
-    color: #28a745;
+    color: #333;
+    margin-bottom: 20px;
     font-size: 1.5em;
-    font-weight: 600;
+    text-align: center;
 }
 
-.info-grid {
+.algorithm-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
 }
 
-.info-card {
-    background: white;
-    padding: 25px;
+.algorithm-item {
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    border-left: 4px solid #667eea;
 }
 
-.info-card:hover {
-    transform: translateY(-5px);
-}
-
-.info-card h4 {
-    color: #333;
-    margin-bottom: 15px;
+.algorithm-item h4 {
+    color: #667eea;
+    margin-bottom: 10px;
     font-size: 1.1em;
 }
 
-.info-card p {
+.algorithm-item p {
     color: #666;
-    font-size: 0.9em;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
-/* 响应式设计 */
+/* 📱 响应式设计 */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
+    .container {
+        padding: 15px;
     }
-    
+
     header {
         padding: 30px 20px;
     }
-    
+
     header h1 {
-        font-size: 2.2em;
+        font-size: 2em;
     }
-    
-    .upload-section, .controls-section, .results-section, .algorithm-info {
-        padding: 30px 20px;
+
+    .upload-area {
+        padding: 40px 20px;
     }
-    
-    .image-comparison {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
+
     .operation-buttons {
         grid-template-columns: 1fr;
-        gap: 15px;
     }
-    
-    .upload-area {
-        padding: 50px 20px;
-    }
-    
-    .info-grid {
+
+    .image-comparison {
         grid-template-columns: 1fr;
-        gap: 15px;
+    }
+
+    .control-buttons {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
-/* 添加动画效果 */
-@keyframes fadeInUp {
+/* ✨ 动画效果 */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -361,6 +351,104 @@ footer {
     }
 }
 
-.controls-section, .results-section, .algorithm-info {
-    animation: fadeInUp 0.6s ease-out;
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 🔗 连接状态指示器 */
+#connectionStatus {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    z-index: 1000;
+    background: #6c757d;
+    transition: all 0.3s ease;
+}
+
+/* 📨 消息提示样式 */
+.temp-message {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+    max-width: 400px;
+    word-wrap: break-word;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.temp-message.success {
+    background: #28a745;
+}
+
+.temp-message.error {
+    background: #dc3545;
+}
+
+.temp-message.warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.temp-message.info {
+    background: #007bff;
+}
+
+/* 🎯 其他增强样式 */
+.operation-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.image-container img[src=""], 
+.image-container img:not([src]) {
+    display: none;
+}
+
+/* 🌊 滚动条美化 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.6);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.8);
+}
+
+/* 🎨 选择文本样式 */
+::selection {
+    background: rgba(102, 126, 234, 0.3);
+    color: #333;
+}
+
+/* 🔄 焦点样式 */
+button:focus,
+input:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
 }
